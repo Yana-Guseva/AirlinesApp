@@ -33,7 +33,8 @@ public class NameServlet extends HttpServlet {
             Cookie loginCookie = new Cookie("user", username);
             loginCookie.setMaxAge(30*60);
             resp.addCookie(loginCookie);
-            resp.sendRedirect("/info.jsp");
+//            resp.sendRedirect("/info.jsp");
+            resp.sendRedirect("./FlightServlet");
 //            filterChain.doFilter(servletRequest, servletResponse);
         } else {
 //            request.getRequestDispatcher("error.html").forward(request, response);

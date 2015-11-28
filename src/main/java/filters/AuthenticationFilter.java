@@ -24,7 +24,7 @@ public class AuthenticationFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
 
         String uri = request.getRequestURI();
-        this.context.log("Requested Resource: "+uri);
+        this.context.log("Requested Resource: " + uri);
 
         HttpSession session = request.getSession(false);
         if (session == null && !(uri.endsWith("html") || uri.endsWith("NameServlet"))) {

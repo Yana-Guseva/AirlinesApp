@@ -1,4 +1,6 @@
-package servlets;
+package controller;
+
+import dao.WorkerDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -7,9 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Created by Yana on 27.11.2015.
+ * Created by Yana on 28.11.2015.
  */
-public class FlightServlet extends HttpServlet {
+public class WorkerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req, resp);
@@ -17,6 +19,8 @@ public class FlightServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        WorkerDAO workerDAO = new WorkerDAO();
+        req.setAttribute("allWorkers", workerDAO.getAllWorker());
+        req.getRequestDispatcher("teamInfo.jsp").forward(req, resp);
     }
 }

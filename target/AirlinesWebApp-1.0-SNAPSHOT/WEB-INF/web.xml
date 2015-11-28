@@ -29,6 +29,26 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
         <url-pattern>/LogoutServlet</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>FlightServlet</servlet-name>
+        <servlet-class>controller.FlightServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>FlightServlet</servlet-name>
+        <url-pattern>/FlightServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>WorkerServlet</servlet-name>
+        <servlet-class>controller.WorkerServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>WorkerServlet</servlet-name>
+        <url-pattern>/WorkerServlet</url-pattern>
+    </servlet-mapping>
+
     <filter>
         <filter-name>AuthenticationFilter</filter-name>
         <filter-class>filters.AuthenticationFilter</filter-class>
