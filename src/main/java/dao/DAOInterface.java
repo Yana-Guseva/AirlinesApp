@@ -9,6 +9,6 @@ public interface DAOInterface<T> {
     public void add(T object);
     public void edit(T object);
     public void delete(T object);
-//    public T getItem();
-//    public List<T> getAll();
+    public T getItem(int id);
+    public List<T> getAll();
 }

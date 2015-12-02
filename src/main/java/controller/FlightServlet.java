@@ -1,6 +1,7 @@
 package controller;
 
 import com.yana.model.Flight;
+import dao.DAOFactory;
 import dao.FlightDAO;
 
 import javax.servlet.ServletException;
@@ -23,41 +24,64 @@ public class FlightServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        FlightDAO flightDAO = new FlightDAO();
-//        Date date = null;
-//        Date time = null;
-//        String stringDateFormat = "dd-MM-yyyy HH:mm:ss";
-//        SimpleDateFormat dateFormat = new SimpleDateFormat(stringDateFormat);
-//        String stringTimeFormat = "HH:mm:ss";
-//        SimpleDateFormat timeFormat = new SimpleDateFormat(stringTimeFormat);
-//
-//        int flightId = Integer.parseInt(req.getParameter("id"));
-//        String cityOfDepart = req.getParameter("city_depart");
-//        String cityOfDest = req.getParameter("city_dest");
-//        int teamId = Integer.parseInt(req.getParameter("id_team"));
-//        String action = req.getParameter("operation");
-//        try {
-//            date = dateFormat.parse(req.getParameter("date_of_flight"));
-//            time = timeFormat.parse(req.getParameter("time_in_flight"));
-//        } catch (ParseException e) {
-//            System.err.println(e);
-//        }
-//
-//        Flight flight = new Flight(flightId, cityOfDepart, cityOfDest, date, time, teamId);
-//
-//        if(action.equalsIgnoreCase("Add")) {
-//            flightDAO.addFlight(flight);
-//        } else if(action.equalsIgnoreCase("Delete")) {
-//            flightDAO.deleteFlught(flight);
-//        } else if (action.equalsIgnoreCase("Edit")) {
-//            flightDAO.editFlight(flight);
-//        } else if (action.equalsIgnoreCase("Search")) {
-//            flight = flightDAO.getFlight(flightId);
-//        }
-//
-//        req.setAttribute("flight", flight);
-        req.setAttribute("size", flightDAO.getAllFlight().size());
-        req.setAttribute("allFlights", flightDAO.getAllFlight());
+        DAOFactory factory = new DAOFactory();
+        ConnectionPool pool = factory.getConnectionPool();
+        FlightDAO flightDAO = factory.getFlightDAO(pool);
+
+        String action = req.getParameter("action");
+        String flightIdStr = req.getParameter("flightId");
+        int flightId = 0;
+        if (flightIdStr != null) {
+            flightId = Integer.parseInt(flightIdStr);
+        }
+        req.setAttribute("id", flightId);
+        String cityOfDepart = req.getParameter("cityOfDepart");
+        String cityOfDest = req.getParameter("cityOfDest");
+        String teamIdStr = req.getParameter("teamId");
+        int teamId = 0;
+        if (teamIdStr != null) {
+            teamId = Integer.parseInt(teamIdStr);
+        }
+        String dateStr = req.getParameter("date");
+        String timeStr = req.getParameter("time");
+        String durationStr = req.getParameter("duration");
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+//        Date date = new Date(System.currentTimeMillis());
+        Date date = null;
+        Date time = null;
+        Date duration = null;
+        try {
+            if (dateStr != null) {
+                date = dateFormat.parse(dateStr);
+            }
+            if (timeStr != null) {
+                time = timeFormat.parse(timeStr);
+            }
+            if (durationStr != null) {
+                duration = timeFormat.parse(durationStr);
+            }
+        } catch (ParseException e) {
+            System.err.println(e);
+        }
+        req.setAttribute("date", dateStr);
+        Flight flight = new Flight(flightId, cityOfDepart, cityOfDest, date, time, duration, teamId);
+
+        if ("Add".equalsIgnoreCase(action)) {
+            flightDAO.add(flight);
+        } else if ("Delete".equalsIgnoreCase(action)) {
+            flightDAO.delete(flight);
+        } else if ("Edit".equalsIgnoreCase(action)) {
+            flightDAO.edit(flight);
+        } else if ("Search".equalsIgnoreCase(action)) {
+            flight = flightDAO.getItem(flightId);
+        }
+
+        req.setAttribute("flight", flight);
+
+        req.setAttribute("size", flightDAO.getAll().size());
+        req.setAttribute("allFlights", flightDAO.getAll());
         req.getRequestDispatcher("flightsInfo.jsp").forward(req, resp);
     }
 }

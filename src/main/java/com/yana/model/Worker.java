@@ -5,16 +5,16 @@ package com.yana.model;
  */
 public class Worker {
     private int workerId;
-    private int postId;
+    private String post;
     private String name;
     private int year;
     private int experience;
 
     public Worker() {}
 
-    public Worker(int workerId, int postId, String name, int year, int experience) {
+    public Worker(int workerId, String post, String name, int year, int experience) {
         this.workerId = workerId;
-        this.postId = postId;
+        this.post = post;
         this.name = name;
         this.year = year;
         this.experience = experience;
@@ -28,12 +28,12 @@ public class Worker {
         this.workerId = workerId;
     }
 
-    public int getPostId() {
-        return postId;
+    public String getPost() {
+        return post;
     }
 
-    public void setPostId(int postId) {
-        this.postId = postId;
+    public void setPost(String post) {
+        this.post = post;
     }
 
     public String getName() {
