@@ -10,10 +10,6 @@ public class DAOFactory {
         return new FlightDAO(pool);
     }
 
-    public WorkerDAO getWorkerDAO(ConnectionPool pool) {
-        return new WorkerDAO(pool);
-    }
-
     public ConnectionPool getConnectionPool() {
         return ConnectionPool.getInstance("jdbc:mysql://localhost:3306/airline_db", "root", "root", 10);
     }

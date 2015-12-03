@@ -7,55 +7,14 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="ct" uri="/WEB-INF/customTag.tld"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="calendar" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <title>Flight Information</title>
 </head>
-<h1>Information about flghts</h1>
-<form action="FlightServlet" method="POST">
-    <table>
-        <tr>
-            <td>Flight ID</td>
-            <td><input type="text" name="flightId" value="${flight.flightId}"/></td>
-        </tr>
-        <tr>
-            <td>City of departure</td>
-            <td><input type="text" name="cityOfDepart" value="${flight.cityOfDeparture}"/></td>
-        </tr>
-        <tr>
-            <td>City of destination</td>
-            <td><input type="text" name="cityOfDest" value="${flight.cityOfDestination}"/></td>
-        </tr>
-        <tr>
-            <td>Date of flight</td>
-            <td><input type="text" name="date" value="<calendar:formatDate value="${flight.date}" pattern="yyyy-MM-dd"/>"/></td>
-        </tr>
-        <tr>
-            <td>Time</td>
-            <td><input type="text" name="time" value="<calendar:formatDate value="${flight.time}" pattern="HH:mm"/>"/></td>
-        </tr>
-        <tr>
-            <td>Duration</td>
-            <td><input type="text" name="duration" value="<calendar:formatDate value="${flight.duration}" pattern="HH:mm"/>"/></td>
-        </tr>
-        <tr>
-            <td>Team number</td>
-            <td><input type="text" name="teamId" value="${flight.teamId}"/></td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <input type="submit" name="action" value="Add"/>
-                <input type="submit" name="action" value="Edit"/>
-                <input type="submit" name="action" value="Search"/>
-                <input type="submit" name="action" value="Delete"/>
-            </td>
-        </tr>
-    </table>
-</form>
-<br>
+<h1>Information about flights</h1>
+
 <table border="1">
     <%--<c:out value="${requestScope.date}"/>--%>
     <tr>
@@ -80,10 +39,18 @@
     </c:forEach>
 </table>
 <br>
-<form action="LogoutServlet" method="POST">
-    <input type="submit" value="Logout">
-</form>
-<form action="login.html" method="POST">
-    <input type="submit" value="Back">
-</form>
+<table cellspacing="0" cellpadding="4">
+    <tr>
+        <td>
+            <form action="login.html" method="POST">
+                <input type="submit" value="Back">
+            </form>
+        </td>
+        <td>
+            <form action="LogoutServlet" method="POST">
+                <input type="submit" value="Logout">
+            </form>
+        </td>
+    </tr>
+</table>
 </html>

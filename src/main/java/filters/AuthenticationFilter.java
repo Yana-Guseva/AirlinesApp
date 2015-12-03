@@ -27,7 +27,8 @@ public class AuthenticationFilter implements Filter {
         this.context.log("Requested Resource: " + uri);
 
         HttpSession session = request.getSession(false);
-        if (session == null && !(uri.endsWith("html") || uri.endsWith("NameServlet"))) {
+        if (session == null && !(uri.endsWith("html") || uri.endsWith("LoginServlet")
+                || uri.endsWith("Dispatcher") || uri.endsWith("RegistrationServlet"))) {
             this.context.log("Unauthorized access request");
             response.sendRedirect("/login.html");
         } else {

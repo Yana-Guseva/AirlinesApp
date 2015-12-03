@@ -1,6 +1,5 @@
 package controller;
 
-import com.yana.model.Post;
 import com.yana.model.Worker;
 import dao.*;
 
@@ -25,7 +24,6 @@ public class WorkerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DAOFactory factory = new DAOFactory();
         ConnectionPool pool = factory.getConnectionPool();
-//        WorkerDAO workerDAO = factory.getWorkerDAO(pool);
 
         String action = req.getParameter("action");
         String idStr = req.getParameter("workerId");
@@ -63,11 +61,9 @@ public class WorkerServlet extends HttpServlet {
             wtDAO.addToTeam(teamId, workerId);
         } else if ("Delete".equalsIgnoreCase(action)) {
             wtDAO.deleteFromTeam(teamId, workerId);
-//            workerDAO.delete(worker);
         } else if ("Edit".equalsIgnoreCase(action)) {
             workerDAO.edit(worker);
         } else if ("Search".equalsIgnoreCase(action)) {
-//            worker = workerDAO.getItem(workerId);
             worker = wtDAO.getWorker(teamId, workerId);
         }
 
@@ -75,14 +71,14 @@ public class WorkerServlet extends HttpServlet {
         req.setAttribute("allWorkers", workerDAO.getAll());
 
         WorkerTeamDAO workerTeamDAO = new WorkerTeamDAO(pool);
-        PostDAO postDAO = new PostDAO(pool);
-        ArrayList<Post> posts = postDAO.getAll();
-
         HttpSession session = req.getSession();
         session.setAttribute("teamId", teamId);
-        req.setAttribute("posts", posts);
         req.setAttribute("teamId", teamId);
         req.setAttribute("workersInTeam", workerTeamDAO.getAllWorkersInTeam(teamId));
-        req.getRequestDispatcher("teamInfo.jsp").forward(req, resp);
+        if (req.getSession().getAttribute("role").equals("dispatcher")) {
+            req.getRequestDispatcher("dispatcherTeamInfo.jsp").forward(req, resp);
+        } else {
+            req.getRequestDispatcher("teamInfo.jsp").forward(req, resp);
+        }
     }
 }

@@ -64,13 +64,6 @@ public class FlightDAO extends AbstractDAO<Flight>{
                 flight.setDate(rs.getDate("date_of_flight"));
                 flight.setTime(rs.getTime("time_of_flight"));
                 flight.setDuration(rs.getTime("duration"));
-//                try {
-//                    flight.setDate(dateFormat.parse(rs.getString("date_of_flight")));
-//                    flight.setTime(timeFormat.parse(rs.getString("time_of_flight")));
-//                    flight.setDuration(timeFormat.parse(rs.getString("duration")));
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
                 flight.setTeamId(rs.getInt("id_team"));
             }
             pool.freeConnection(conn);
@@ -100,13 +93,6 @@ public class FlightDAO extends AbstractDAO<Flight>{
                 flight.setDate(rs.getDate("date_of_flight"));
                 flight.setTime(rs.getTime("time_of_flight"));
                 flight.setDuration(rs.getTime("duration"));
-//                try {
-//                    flight.setDate(dateFormat.parse(rs.getString("date_of_flight")));
-//                    flight.setTime(timeFormat.parse(rs.getString("time_of_flight")));
-//                    flight.setDuration(timeFormat.parse(rs.getString("duration")));
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
                 flight.setTeamId(rs.getInt("id_team"));
                 flights.add(flight);
             }

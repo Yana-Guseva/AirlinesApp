@@ -48,7 +48,6 @@ public class FlightServlet extends HttpServlet {
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
-//        Date date = new Date(System.currentTimeMillis());
         Date date = null;
         Date time = null;
         Date duration = null;
@@ -79,9 +78,12 @@ public class FlightServlet extends HttpServlet {
         }
 
         req.setAttribute("flight", flight);
-
         req.setAttribute("size", flightDAO.getAll().size());
         req.setAttribute("allFlights", flightDAO.getAll());
-        req.getRequestDispatcher("flightsInfo.jsp").forward(req, resp);
+        if (req.getSession().getAttribute("role").equals("administrator")) {
+            req.getRequestDispatcher("adminFlightsInfo.jsp").forward(req, resp);
+        } else {
+            req.getRequestDispatcher("flightsInfo.jsp").forward(req, resp);
+        }
     }
 }

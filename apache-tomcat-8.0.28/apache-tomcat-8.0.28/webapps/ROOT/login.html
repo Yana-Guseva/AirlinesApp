@@ -5,22 +5,33 @@
     <title>Login Page</title>
 </head>
 <body>
-
-<!--Залогиньтесь, пожалуйста:-->
-<!--&lt;!&ndash;<form action="info.jsp">&ndash;&gt;-->
-<!--<form action="NameServlet" method="post">-->
-    <!--<input name="user" type="text" value="login" title="login"/>-->
-    <!--<input name="pwd" type="password" value="" title="password"/>-->
-
-    <!--<input type="submit"/>-->
-<!--</form>-->
-
-<form action="NameServlet" method="post">
-
-    Username: <input type="text" name="user">
-    Password: <input type="password" name="pwd">
-    <br>
-    <input type="submit" value="Login">
-</form>
+<table cellspacing="0" cellpadding="4">
+    <tr>
+        <td>
+            <form action="LoginServlet" method="POST">
+                <table cellspacing="0" cellpadding="4">
+                    <tr>
+                        <td align="right">Username</td>
+                        <td><input type="text" name="user"></td>
+                    </tr>
+                    <tr>
+                        <td align="right">Password</td>
+                        <td><input type="password" name="pwd"></td>
+                    </tr>
+                    <tr>
+                    <td></td>
+                    <td><input type="submit" name="action" value="Login"></td>
+                    </tr>
+                </table>
+                <!--<input type="submit" name="action" value="Login">-->
+            </form>
+        </td>
+        <td>
+            <form action="Dispatcher" method="POST">
+                <input type="submit" name="action" value="Registration">
+            </form>
+        </td>
+    </tr>
+</table>
 </body>
 </html>

@@ -81,7 +81,7 @@
     } else {
 %>
 <font size=5>
-    You must enter your name and email address correctly.
+    You must enter your name and role address correctly.
 </font>
 <%
     }

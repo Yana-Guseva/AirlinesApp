@@ -27,7 +27,7 @@ public class TableBean {
     Entries entries;
     String date;
     String name = null;
-    String email = null;
+    String role = null;
     boolean processError = false;
 
     public TableBean() {
@@ -45,11 +45,11 @@ public class TableBean {
     }
 
     public void setEmail(String mail) {
-        this.email = mail;
+        this.role = mail;
     }
 
     public String getEmail() {
-        return this.email;
+        return this.role;
     }
 
     public String getDate() {
@@ -66,10 +66,10 @@ public class TableBean {
         this.processError = false;
         if (name == null || name.equals(""))
             setName(request.getParameter("name"));
-        if (email == null || email.equals(""))
-            setEmail(request.getParameter("email"));
-        if (name == null || email == null || name.equals("")
-                || email.equals("")) {
+        if (role == null || role.equals(""))
+            setEmail(request.getParameter("role"));
+        if (name == null || role == null || name.equals("")
+                || role.equals("")) {
             this.processError = true;
             return;
         }
